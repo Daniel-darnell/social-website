@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.contrib.auth import authenticate, login 
 from .forms import LoginForm
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def user_login(request):
@@ -24,4 +25,7 @@ def user_login(request):
         return render(request, 'account/login.html', {'form':form})
 
 
-
+@login_required  #checks whether the current user is authenticated and certified 'CLB' hehe
+def dashboard(request):
+    return render(request, 'account/dashboard.html',
+                    {'section': 'dashboard'})
